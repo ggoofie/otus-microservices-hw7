@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-06-16T15:30:05.696Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="2kgN9cWFVfJ8I2wVVwgQ" version="24.5.4" type="device">
+<mxfile host="app.diagrams.net" modified="2024-06-17T13:01:10.189Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="l9dy6T56wz_L3uXi_VcU" version="24.5.4" type="device">
   <diagram name="Страница — 1" id="ukebenKNWWrmJzOXdREJ">
-    <mxGraphModel dx="1195" dy="163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="855" dy="71" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -156,9 +156,6 @@
         </mxCell>
         <mxCell id="ZBSLw5quG76KyDYo4ULT-58" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="ZBSLw5quG76KyDYo4ULT-57">
           <mxGeometry x="40" y="430" width="10" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="ZBSLw5quG76KyDYo4ULT-59" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="ZBSLw5quG76KyDYo4ULT-57">
-          <mxGeometry x="40" y="540" width="10" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ZBSLw5quG76KyDYo4ULT-60" value="Subscribe Event Notification" style="endArrow=block;startArrow=block;endFill=1;startFill=1;html=1;rounded=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" edge="1" parent="1">
           <mxGeometry width="160" relative="1" as="geometry">
