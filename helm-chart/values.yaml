@@ -1,0 +1,26 @@
+kafka:
+  bootstrapServer: "kafka.hw7-stream-processing.svc.cluster.local:9092"
+  brokerList: "kafka-controller-0.kafka-controller-headless.hw7-stream-processing.svc.cluster.local:9092,kafka-controller-1.kafka-controller-headless.hw7-stream-processing.svc.cluster.local:9092,kafka-controller-2.kafka-controller-headless.hw7-stream-processing.svc.cluster.local:9092"
+
+ingress:
+  port: 80
+  host: arch.homework
+  pathType: ImplementationSpecific
+
+container:
+  billing:
+    image: ggoofie/otus-microservices-hw7-billing:1.0
+    replicaCount: 1
+    containerPort: 8081
+  notice:
+    image: ggoofie/otus-microservices-hw7-notice:1.0
+    replicaCount: 1
+    containerPort: 8082
+  order:
+    image: ggoofie/otus-microservices-hw7-order:1.0
+    replicaCount: 1
+    containerPort: 8080
+
+ports:
+  port: 80
+  protocol: TCP

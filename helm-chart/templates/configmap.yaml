@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config-billing
+data:
+  dbName: billing
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config-order
+data:
+  dbName: order
+  kafkaBrokerList: {{ .Values.kafka.brokerList }}
+  billingBaseUrl: "http://{{ .Release.Name }}-svc-billing:80"
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config-notice
+data:
+  dbName: notice
+  kafkaBootstrapServer: {{ .Values.kafka.bootstrapServer }}

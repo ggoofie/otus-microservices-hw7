@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-dp-billing
+  labels:
+    app: {{ .Release.Name }}-billing
+spec:
+  replicas: {{ .Values.container.billing.replicaCount }}
+  selector:
+    matchLabels:
+      env: billing
+  template:
+    metadata:
+      labels:
+        env: billing
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-billing
+          image: {{ .Values.container.billing.image }}
+          ports:
+            - containerPort: {{ .Values.container.billing.containerPort }}
+          env:
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-billing
+                  key: dbName
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: dbUsername
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: dbPassword
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-dp-notice
+  labels:
+    app: {{ .Release.Name }}-notice
+spec:
+  replicas: {{ .Values.container.notice.replicaCount }}
+  selector:
+    matchLabels:
+      env: notice
+  template:
+    metadata:
+      labels:
+        env: notice
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-notice
+          image: {{ .Values.container.notice.image }}
+          ports:
+            - containerPort: {{ .Values.container.notice.containerPort }}
+          env:
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-notice
+                  key: dbName
+            - name: KAFKA_BOOTSTRAP_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-notice
+                  key: kafkaBootstrapServer
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: dbUsername
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: dbPassword
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-dp-order
+  labels:
+    app: {{ .Release.Name }}-order
+spec:
+  replicas: {{ .Values.container.order.replicaCount }}
+  selector:
+    matchLabels:
+      env: order
+  template:
+    metadata:
+      labels:
+        env: order
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-order
+          image: {{ .Values.container.order.image }}
+          ports:
+            - containerPort: {{ .Values.container.order.containerPort }}
+          env:
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-order
+                  key: dbName
+            - name: KAFKA_BROKER_LIST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-order
+                  key: kafkaBrokerList
+            - name: BILLING_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config-order
+                  key: billingBaseUrl
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: dbUsername
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: dbPassword
