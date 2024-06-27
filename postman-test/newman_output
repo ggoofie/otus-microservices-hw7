@@ -1,0 +1,143 @@
+newman
+
+otus-microservices-hw7
+
+→ create account
+  POST http://arch.homework/api/account  
+  200 OK ★ 703ms time ★ 321B↑ 209B↓ size ★ 9↑ 4↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 32B
+  │ {
+  │     "username": "farsiyanva"
+  │ }
+  └ 
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 69B
+  │ {"id":"9720dfb3-1af6-4676-98b5-8158ad31c19b","username
+  │ ":"farsiyanva"}
+  └
+  prepare   wait   dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  11ms      6ms    684µs        568µs           655ms            39ms       1ms       715ms 
+
+  ✓  Test: create account
+
+→ refill account
+  PATCH http://arch.homework/api/account/refill  
+  200 OK ★ 50ms time ★ 349B↑ 99B↓ size ★ 9↑ 3↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 52B
+  │ {
+  │     "username": "farsiyanva",
+  │     "amount": 10.0
+  │ }
+  └ 
+  ↓ text/plain ★ text ★ plain ★ utf8
+
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  774µs     355µs   (cache)      (cache)         48ms             1ms        33µs      50ms  
+
+  ✓  Test: refill account
+
+→ create affordable order
+  POST http://arch.homework/api/order  
+  200 OK ★ 793ms time ★ 371B↑ 209B↓ size ★ 9↑ 4↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 84B
+  │ {
+  │     "username": "farsiyanva",
+  │     "description": "First order",
+  │     "price": 6.0
+  │ }
+  └ 
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 69B
+  │ {"id":1,"description":"First order","price":6.0,"statu
+  │ s":"COMPLETED"}
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  666µs     125µs   (cache)      (cache)         751ms            41ms       176µs     793ms 
+
+  ✓  Test: create affordable order
+
+→ check balance after affordable order
+  GET http://arch.homework/api/account/balance/farsiyanva  
+  200 OK ★ 74ms time ★ 255B↑ 143B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 3B
+  │ 4.0
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  647µs     145µs   (cache)      (cache)         33ms             39ms       151µs     73ms  
+
+  ✓  Test: check balance after affordable order
+
+→ get notice for affordable order
+  GET http://arch.homework/api/notification/1  
+  200 OK ★ 496ms time ★ 243B↑ 207B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 67B
+  │ {"orderId":1,"orderStatus":"COMPLETED","description":"
+  │ First order"}
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  640µs     201µs   (cache)      (cache)         453ms            41ms       162µs     496ms 
+
+  ✓  Test: get notice for affordable order
+
+→ create unavailable order
+  POST http://arch.homework/api/order  
+  406 Not Acceptable ★ 48ms time ★ 372B↑ 178B↓ size ★ 9↑ 4↓ headers ★ 0 cookies
+  ┌ ↑ raw ★ 85B
+  │ {
+  │     "username": "farsiyanva",
+  │     "description": "Second order",
+  │     "price": 8.0
+  │ }
+  └ 
+  ┌ ↓ text/plain ★ text ★ plain ★ utf8 ★ 26B
+  │ Ошибка оплаты!
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  810µs     235µs   (cache)      (cache)         42ms             4ms        25µs      47ms  
+
+  ✓  Test: create unavailable order
+
+→ check balance after unavailable order
+  GET http://arch.homework/api/account/balance/farsiyanva  
+  200 OK ★ 50ms time ★ 255B↑ 143B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 3B
+  │ 4.0
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  1ms       461µs   (cache)      (cache)         8ms              40ms       108µs     50ms  
+
+  ✓  Test: check balance after unavailable order
+
+→ get notice for unavailable order
+  GET http://arch.homework/api/notification/2  
+  200 OK ★ 49ms time ★ 243B↑ 207B↓ size ★ 7↑ 4↓ headers ★ 0 cookies
+  ┌ ↓ application/json ★ text ★ json ★ utf8 ★ 67B
+  │ {"orderId":2,"orderStatus":"REJECTED","description":"S
+  │ econd order"}
+  └
+  prepare   wait    dns-lookup   tcp-handshake   transfer-start   download   process   total 
+  928µs     149µs   (cache)      (cache)         7ms              40ms       89µs      49ms  
+
+  ✓  Test: get notice for unavailable order
+
+┌─────────────────────────┬─────────────────────┬────────────────────┐
+│                         │            executed │             failed │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              iterations │                   1 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│                requests │                   8 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│            test-scripts │                  16 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│      prerequest-scripts │                   8 │                  0 │
+├─────────────────────────┼─────────────────────┼────────────────────┤
+│              assertions │                   8 │                  0 │
+├─────────────────────────┴─────────────────────┴────────────────────┤
+│ total run duration: 2.4s                                           │
+├────────────────────────────────────────────────────────────────────┤
+│ total data received: 304B (approx)                                 │
+├────────────────────────────────────────────────────────────────────┤
+│ average response time: 282ms [min: 48ms, max: 793ms, s.d.: 304ms]  │
+├────────────────────────────────────────────────────────────────────┤
+│ average DNS lookup time: 684µs [min: 684µs, max: 684µs, s.d.: 0µs] │
+├────────────────────────────────────────────────────────────────────┤
+│ average first byte time: 250ms [min: 7ms, max: 751ms, s.d.: 296ms] │
+└────────────────────────────────────────────────────────────────────┘
